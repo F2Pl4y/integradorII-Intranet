@@ -9,37 +9,43 @@ window.addEventListener('load', (e) => {
     btnAgregarModal();
     evaluarCampos();
 })
-
+/**
+ * Realiza una solicitud GET al servidor para obtener las categorías.
+ * Actualiza el contenido de un elemento en la página con las categorías obtenidas.
+ */
 function categoriaSel() {
     $.ajax({
         type: "GET",
         url: `${dominio}/categoria/sel/`,
         dataType: "json",
         success: function (data) {
+            // Vaciar el contenido actual del elemento con id 'contentCategorias'
             $('#contentCategorias').empty();
             let contenido = '';
-            if(data["exito"] === true){
+            if (data["exito"] === true) {
+                // Recorrer cada elemento en el arreglo 'resultado' de la respuesta
                 $.each(data["resultado"], function (llave, valor) {
                     let template = `<div class="card bg-dark text-light element">`;
-                        template += `<div class="card-body">${valor["NomCategoria"]}</div>`;
-                        template += `<div class="btn-group">`;
-                            template += `<button type='button' class='btn btn-warning btnUpdateCateg' data-toggle='modal' data-target='#modalInsUpdCategoria' onclick='categoriaGet(${valor["IDCategoria"]})'>`;
-                                template += `<i class='bx bx-up-arrow-alt'></i>`;
-                            template += `</button>`;
-                            template += `<button type='button' class='btn btn-danger' data-id='2' onclick='categoriaDel(${valor["IDCategoria"]})'>`;
-                                template += `<i class='bx bx-trash'></i>`;
-                            template += `</button>`;
-                        template += `</div>`;
+                    template += `<div class="card-body">${valor["NomCategoria"]}</div>`;
+                    template += `<div class="btn-group">`;
+                    template += `<button type='button' class='btn btn-warning btnUpdateCateg' data-toggle='modal' data-target='#modalInsUpdCategoria' onclick='categoriaGet(${valor["IDCategoria"]})'>`;
+                    template += `<i class='bx bx-up-arrow-alt'></i>`;
+                    template += `</button>`;
+                    template += `<button type='button' class='btn btn-danger' data-id='2' onclick='categoriaDel(${valor["IDCategoria"]})'>`;
+                    template += `<i class='bx bx-trash'></i>`;
+                    template += `</button>`;
+                    template += `</div>`;
                     template += `</div>`
                     contenido += template;
                 });
+                // Actualizar el contenido del elemento con id 'contentCategorias'
                 $('#contentCategorias').html(contenido);
             }
         }
     });
 }
 
-function categoriaGet(id){
+function categoriaGet(id) {
     const tituloModalCategoria = document.getElementById('tituloModalCategoria');
     const btnInsUpdCategoria = document.getElementById('btnInsUpdCategoria');
     tituloModalCategoria.innerText = 'Actualizar categoria';
@@ -68,7 +74,7 @@ function categoriaIns() {
         processData: false,
         success: function (data) {
             mensajeValidacion(data["mensaje"], data["exito"]);
-            if(data["exito"]){
+            if (data["exito"]) {
                 ocultarModal();
                 categoriaSel();
             }
@@ -76,7 +82,7 @@ function categoriaIns() {
     });
 }
 
-function categoriaUpd(){
+function categoriaUpd() {
     const registrosCategoria = new FormData();
     registrosCategoria.append("txtNomCategoria", $('#txtNomCategoria').val());
     $.ajax({
@@ -88,7 +94,7 @@ function categoriaUpd(){
         processData: false,
         success: function (data) {
             mensajeValidacion(data["mensaje"], data["exito"]);
-            if(data["exito"]){
+            if (data["exito"]) {
                 ocultarModal();
                 categoriaSel();
             }
@@ -96,16 +102,16 @@ function categoriaUpd(){
     });
 }
 
-function categoriaDel(id){
-    mensajeConfirmacion('Eliminar', '¿Seguro que desea eliminar este trabajador?').then((booleano)=>{
-        if(booleano){
+function categoriaDel(id) {
+    mensajeConfirmacion('Eliminar', '¿Seguro que desea eliminar este trabajador?').then((booleano) => {
+        if (booleano) {
             $.ajax({
                 type: "DELETE",
                 url: `${dominio}/categoria/del/${id}/`,
                 dataType: "json",
                 success: function (data) {
                     mensajeValidacion(data["mensaje"], data["exito"]);
-                    if(data["exito"]) categoriaSel();
+                    if (data["exito"]) categoriaSel();
                 }
             });
         }
@@ -124,17 +130,17 @@ function ocultarModal() {
     $('#modalInsUpdCategoria').modal('hide');
 }
 
-function btnAgregarModal(){
+function btnAgregarModal() {
     const tituloModalCategoria = document.getElementById('tituloModalCategoria');
     const btnInsUpdCategoria = document.getElementById('btnInsUpdCategoria');
     const btnAgregar = document.getElementById('btnAgregar');
-    btnAgregar.addEventListener('click', (e)=>{
+    btnAgregar.addEventListener('click', (e) => {
         tituloModalCategoria.innerText = 'Registrar categoria';
         btnInsUpdCategoria.innerText = 'Registrar';
     })
 }
 
-function evaluarCampos(){
+function evaluarCampos() {
     const txtNomCategoria = document.getElementById('txtNomCategoria');
     const iconoCategoria = document.querySelector('#txtNomCategoria+.icono');
     txtNomCategoria.addEventListener('keyup', (e) => {
@@ -144,25 +150,25 @@ function evaluarCampos(){
     });
 }
 
-function efectoModalAlDesaparecer(){
+function efectoModalAlDesaparecer() {
     $('#modalInsUpdCategoria').on('hide.bs.modal', function (e) {
         limpiarCampoFormulario();
     });
 }
 
-function accionBtnModal(){
+function accionBtnModal() {
     const btnInsUpdCategoria = document.getElementById('btnInsUpdCategoria');
-    btnInsUpdCategoria.addEventListener('click', (e)=>{
-        if(evaluarCategoria["NomCategoria"]){
-            if($('#txtIdCategoria').val() === '') categoriaIns();
+    btnInsUpdCategoria.addEventListener('click', (e) => {
+        if (evaluarCategoria["NomCategoria"]) {
+            if ($('#txtIdCategoria').val() === '') categoriaIns();
             else categoriaUpd();
-        }else{
+        } else {
             mensajeValidacion('Existen campos que no se han completado correctamente, por favor revisar el formulario', false);
         }
     })
 }
 
-function limpiarCampoFormulario(){
+function limpiarCampoFormulario() {
     $('#txtIdCategoria').val('');
 
     $('#txtNomCategoria').val('');

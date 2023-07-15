@@ -8,7 +8,7 @@ window.addEventListener('load', (e) => {
     iniciarSesion();
     if (window.location.pathname === "/index.html") {
         evaluarCampos();
-    }else{
+    } else {
         cerrarSesion();
     }
 });
@@ -38,7 +38,7 @@ function isSessionValid(token) {
 
 function cerrarSesion() {
     const btnLogout = document.getElementById('btnLogout');
-    btnLogout.addEventListener('click', (e)=>{
+    btnLogout.addEventListener('click', (e) => {
         mensajeConfirmacion('Cerrar sesión', '¿Estás seguro que deseas cerrar sesión?').then((booleano) => {
             if (booleano) {
                 sessionStorage.setItem("access_token", null);
@@ -56,7 +56,7 @@ function checkSession() {
             if (window.location.pathname === "/index.html") {
                 window.location.href = '/pages/dashboard.html'
             }
-        }else if (window.location.pathname !== "/index.html") {
+        } else if (window.location.pathname !== "/index.html") {
             window.location.href = '../index.html';
         }
     }).catch(error => {
@@ -64,7 +64,7 @@ function checkSession() {
     });
 }
 
-function iniciarSesion(){
+function iniciarSesion() {
     $('#loginForm').submit(function (event) {
         event.preventDefault();
 
@@ -86,11 +86,11 @@ function iniciarSesion(){
                     setSession(response["mensaje"]);
                     checkSession();
                 } else {
-                    
+
                 }
             },
             error: function () {
-                
+
             }
         });
     });
