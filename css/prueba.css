@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputPrueba{
+    padding: 5px 10px;
+    font-size: 1.2rem;
+    border: 3px solid #000;
+}
+
+.inputPrueba.positivo{
+    border-color: #0f0;
+}
+
+.inputPrueba.negativo{
+    border-color: #f00;
+}

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="#" />
+    <title>Modulo Platillo</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../css/styleadmin.css" />
+  </head>
+
+  <body>
+    <div class="modal fade modalCrear" id="modalInsUpdPlatillo">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="tituloModalPlatillo">
+              Registrar Platillos
+            </h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              id="modalClose"
+            >
+              &times;
+            </button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <form id="formularioRegistrarPlatillo">
+              <div class="contenido">
+                <input type="hidden" name="txtIdPlatillo" id="txtIdPlatillo" />
+                <div class="ladoIzq">
+                  <div class="form-group formGroup" id="nombrePlatillo">
+                    <label for="txtNombrePlatillo">Platillo:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="txtNombrePlatillo"
+                      placeholder="Ingresa nombre"
+                    />
+                    <div class="icono"></div>
+                  </div>
+                  <div class="form-group formGroup" id="descripPlatillo">
+                    <label for="descripPlatillo">Descripción:</label>
+                    <textarea
+                      class="form-control"
+                      rows="5"
+                      id="txtDescripcion"
+                    ></textarea>
+                    <div class="icono"></div>
+                  </div>
+                </div>
+                <div class="ladoDer">
+                  <div class="form-group formGroup" id="precioPlatillo">
+                    <label for="txtPrecio">Precio:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="txtPrecio"
+                      placeholder="Ingresa el precio"
+                    />
+                    <div class="icono"></div>
+                  </div>
+                  <div class="form-group">
+                    <label for="sel1">Categoria:</label>
+                    <select
+                      class="form-control"
+                      id="categoriaSelectRegisterPlatillo"
+                    ></select>
+                  </div>
+                </div>
+              </div>
+              <div class="custom-file form-group">
+                <input
+                  type="file"
+                  class="custom-file-input"
+                  id="imagenPlatillo"
+                />
+                <label class="custom-file-label" for="imagenPlatillo"
+                  >Choose file</label
+                >
+                <p></p>
+              </div>
+              <button
+                type="button"
+                class="btn btn-success"
+                id="btnInsUpdPlatillo">
+                Registrar
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <header class="header">
+      <div class="nav_barraLateral">
+        <div id="btnMenu">
+          <i class="bx bx-menu"></i>
+        </div>
+      </div>
+    </header>
+    <nav id="sidenav">
+      <div class="tittle-sidenav">
+        <h1>Intranet Paco's Bill</h1>
+        <div id="btnClose">
+          <i class="bx bx-x"></i>
+        </div>
+      </div>
+
+      <div id="menu">
+        <ul id="main-nav" class="menus">
+          <li>
+            <a href="dashboard.html"> <i class='bx bxs-dashboard'></i>Dashboard </a>
+          </li>
+          <li>
+            <a href="venta.html"> <i class="bx bx-dollar"></i>Ventas </a>
+          </li>
+          <li>
+            <a href="platillo.html">
+              <i class="bx bxs-bowl-rice"></i>Platillos
+            </a>
+          </li>
+          <li>
+            <a href="categoria.html">
+              <i class="bx bxs-category"></i>Categorias
+            </a>
+          </li>
+          <li>
+            <a href="trabajador.html">
+              <i class="bx bxs-user-badge"></i>Empleados
+            </a>
+          </li>
+          <li>
+            <a href="cargo.html"> <i class="bx bxs-hard-hat"></i>Cargos </a>
+          </li>
+          <li>
+            <a href="cliente.html"> <i class="bx bx-user"></i>Clientes </a>
+          </li>
+          <li>
+            <a href="#" id="btnLogout"> <i class='bx bx-log-out'></i>Cerrar sesión</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <main class="main platillos">
+      <div class="mainTittle">
+        <h3>MODULO PLATILLOS</h3>
+        <div>
+          <a
+            href="#"
+            class="btn btn-success"
+            data-toggle="modal"
+            data-target="#modalInsUpdPlatillo"
+            >Insertar</a
+          >
+        </div>
+        <select
+          name="cars"
+          class="optionCategoria"
+          class="custom-select"
+          id="optionCategoria"
+        ></select>
+      </div>
+      <div class="contenedorMain platillos">
+        <div class="bodyMainFlex">
+          <div class="primario">
+            <div class="adicional">
+              <div class="input-group buscador">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Platillo</span>
+                </div>
+                <input
+                  style="z-index: 0"
+                  type="text"
+                  class="form-control"
+                  id="inputPlatillo"
+                  placeholder="Buscar por nombre"
+                />
+              </div>
+            </div>
+            <div class="ofertas-content" id="platilloContent"></div>
+          </div>
+          <div class="secundario">
+            <ul id="listaCategorias"></ul>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../js/controllerMain.js"></script>
+    <script src="../js/controller/validadorcontroller.js"></script>
+    <script src="../js/controller/platillocontroller.js"></script>
+  </body>
+</html>
