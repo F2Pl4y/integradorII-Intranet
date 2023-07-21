@@ -3,7 +3,7 @@ const dominio = 'http://127.0.0.1:5000';
 const expresiones = {
     nombreCargo: /^[\w,\s]{5,30}$/,
     nombreCategoria: /^[\w,\s]{5,50}$/,
-    nombrePlatillo: /^[\w,\s]{5,100}$/,
+    nombrePlatillo : /^[\w,\s]{5,100}$/,
     dinero: /^\d+(.(\d{1,2})?)?$/,
     correo: /^([a-zA-Z0-9_.+-]{1,}@[\w-]+\.+[a-zA-Z0-9-.]+){1,240}$/,
     dni: /^\d{8}$/,
@@ -22,7 +22,6 @@ window.addEventListener('load', (e) => {
     }
 });
 
-// Función para agregar efecto visual a un input de tipo archivo
 function menuResponsive() {
     const btnMenu = document.getElementById('btnMenu');
     const menu = document.getElementById('sidenav');
@@ -34,14 +33,12 @@ function menuResponsive() {
     })
 }
 
-// Función para cambiar la apariencia de un icono y un input según un valor booleano
 function efectoInputImg() {
     $(".custom-file-input").on("change", function () {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
 }
-
 
 function inputCheck(icono, input, boolean) {
     if (boolean) {
@@ -59,7 +56,6 @@ function inputCheck(icono, input, boolean) {
     }
 }
 
-// Función para mostrar un mensaje de validación
 function mensajeValidacion(mensaje, validacion) {
     const config = {
         title: validacion ? 'Exito' : 'Error',
@@ -70,7 +66,7 @@ function mensajeValidacion(mensaje, validacion) {
     }
     Swal.fire(config);
 }
-// Función para mostrar un mensaje de confirmación y devolver una promesa
+
 function mensajeConfirmacion(titulo, mensaje) {
     return new Promise((resolve) => {
         Swal.fire({

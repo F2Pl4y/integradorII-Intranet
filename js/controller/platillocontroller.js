@@ -17,9 +17,6 @@ window.addEventListener('load', (e) => {
     evaluarCampos();
 })
 
-/**
- * Agrega un efecto de búsqueda en tiempo real para filtrar los resultados de platillos en una sección de ofertas.
- */
 function efectoBusquedaPlatillo() {
     $(document).ready(function () {
         $("#inputPlatillo").on("keyup", function () {
@@ -31,9 +28,6 @@ function efectoBusquedaPlatillo() {
     });
 }
 
-/**
- * Obtiene los platillos de una categoría específica o de todas las categorías mediante una solicitud AJAX y los muestra en una sección de ofertas.
- */
 function platilloSel(idCategoria = null) {
     const url = idCategoria === null ? `${dominio}/platillo/sel/` : `${dominio}/platillo/sel/${idCategoria}`;
     $.ajax({
@@ -44,7 +38,6 @@ function platilloSel(idCategoria = null) {
             idCategoriaGlobal = idCategoria;
             let contenido = '';
             if (data["exito"] === true) {
-                // Si la solicitud fue exitosa, se recorren los platillos y se construye el contenido de la sección de ofertas
                 $.each(data["resultado"], function (llave, valor) {
                     let template = `<div class="cardOfertas efectoCarta">`;
                     template += `<div class="front">`;
@@ -75,9 +68,6 @@ function platilloSel(idCategoria = null) {
     });
 }
 
-/**
- * Actualiza un platillo existente en el sistema mediante una solicitud AJAX.
- */
 function platilloUpd() {
     const registrosPlatillo = new FormData();
     registrosPlatillo.append("txtNombrePlatillo", $('#txtNombrePlatillo').val());
@@ -95,7 +85,7 @@ function platilloUpd() {
         processData: false,
         success: function (data) {
             mensajeValidacion(data["mensaje"], data["exito"]);
-            if (data["exito"]) {
+            if(data["exito"]){
                 ocultarModal();
                 platilloSel(idCategoriaGlobal);
             }
@@ -103,9 +93,6 @@ function platilloUpd() {
     });
 }
 
-/**
- * Obtiene los detalles de un platillo específico mediante una solicitud AJAX y actualiza los campos del formulario.
- */
 function platilloGet(id) {
     const tituloModalPlatillo = document.getElementById('tituloModalPlatillo');
     const btnInsUpdPlatillo = document.getElementById('btnInsUpdPlatillo');
@@ -128,9 +115,6 @@ function platilloGet(id) {
     });
 }
 
-/**
- * Inserta un nuevo platillo en el sistema mediante una solicitud AJAX.
- */
 function platilloIns() {
     const registrosPlatillo = new FormData();
     registrosPlatillo.append("txtNombrePlatillo", $('#txtNombrePlatillo').val());
@@ -148,7 +132,7 @@ function platilloIns() {
         processData: false,
         success: function (data) {
             mensajeValidacion(data["mensaje"], data["exito"]);
-            if (data["exito"]) {
+            if(data["exito"]){
                 ocultarModal();
                 platilloSel(idCategoriaGlobal);
             }
@@ -156,9 +140,6 @@ function platilloIns() {
     });
 }
 
-/**
- * Elimina un platillo existente del sistema mediante una solicitud AJAX.
- */
 function platilloDel(idPlatillo) {
     $.ajax({
         type: "DELETE",
@@ -170,9 +151,6 @@ function platilloDel(idPlatillo) {
     });
 }
 
-/**
- * Realiza una solicitud AJAX para obtener las categorías y muestra las opciones en un elemento select o una lista, dependiendo del ancho de la ventana.
- */
 function categoriaSel() {
     $.ajax({
         type: "GET",
@@ -204,9 +182,7 @@ function categoriaSel() {
         }
     });
 }
-/**
- * Realiza una solicitud AJAX para obtener las categorías y muestra las opciones en un elemento select dentro de un modal.
- */
+
 function llenarComboCategoriaModal() {
     $.ajax({
         type: "GET",
@@ -227,17 +203,14 @@ function llenarComboCategoriaModal() {
     });
 }
 
-/**
- * Agrega un evento al botón del modal para determinar si se debe realizar una inserción o actualización de un platillo.
- */
 function accionBtnModal() {
     const btnInsUpdPlatillo = document.getElementById('btnInsUpdPlatillo');
     btnInsUpdPlatillo.addEventListener('click', (e) => {
         e.preventDefault();
-        if (evaluarPlatillo["nombrePlatillo"] && evaluarPlatillo["imagen"] && evaluarPlatillo["precio"]) {
+        if(evaluarPlatillo["nombrePlatillo"] && evaluarPlatillo["imagen"] && evaluarPlatillo["precio"]){
             if ($('#txtIdPlatillo').val() === '') platilloIns();
             else platilloUpd();
-        } else {
+        }else{
             mensajeValidacion('Existen campos que no se han completado correctamente, por favor revisar el formulario', false);
         }
     })
@@ -251,7 +224,7 @@ function evaluarCampos() {
 
     const txtPrecio = document.getElementById('txtPrecio');
     const iconoPrecio = document.querySelector('#txtPrecio+.icono');
-
+    
     const imagenPlatillo = document.getElementById('imagenPlatillo');
 
     txtNombrePlatillo.addEventListener('keyup', (e) => {
@@ -266,17 +239,13 @@ function evaluarCampos() {
         inputCheck(iconoPrecio, txtPrecio, comprobarPrecio);
     });
 
-    imagenPlatillo.addEventListener('change', (e) => {
+    imagenPlatillo.addEventListener('change', (e)=>{
         const archivo = e.target.files[0];
-        if (archivo != undefined && archivo.size <= 5000000 && formatosArchivo.includes(archivo.type)) {
+        if(archivo != undefined && archivo.size <= 5000000 && formatosArchivo.includes(archivo.type)){
             evaluarPlatillo["imagen"] = true;
         }
     })
 }
-
-/**
- * Agrega un evento al modal para limpiar los campos del formulario al ocultarse.
- */
 
 function efectoModalAlDesaparecer() {
     $('#modalInsUpdPlatillo').on('hide.bs.modal', function (e) {
@@ -284,25 +253,22 @@ function efectoModalAlDesaparecer() {
     });
 }
 
-/**
- * Limpia o actualiza el elemento select de categoría en el formulario del modal.
- */
 function limpiarActualizarCombobox(boolean, idCategoria = null) {
     const categoriaOptions = document.querySelectorAll('#categoriaSelectRegisterPlatillo>option');
     const categoria = document.getElementById('categoriaSelectRegisterPlatillo');
-    if (boolean) {
+    if(boolean){
         for (let i = 0; i < categoriaOptions.length; i++) {
             const option = categoriaOptions[i];
-            if (i === 0) {
+            if(i === 0){
                 option.setAttribute("selected", "selected");
-            } else {
+            }else{
                 option.removeAttribute("selected");
             }
         }
-    } else {
+    }else{
         for (let i = 0; i < categoriaOptions.length; i++) {
             const option = categoriaOptions[i];
-            if (parseInt(option.value) === idCategoria) {
+            if(parseInt(option.value) === idCategoria){
                 option.setAttribute("selected", "selected");
                 continue;
             }
@@ -310,13 +276,10 @@ function limpiarActualizarCombobox(boolean, idCategoria = null) {
         }
         categoriaSelectRegisterPlatillo.value = idCategoria;
     }
-
+    
 
 }
 
-/**
- * Limpia los campos del formulario en el modal.
- */
 function limpiarCampoFormulario() {
     $('#txtIdPlatillo').val('');
     $('#txtNombrePlatillo').val('');
@@ -326,9 +289,6 @@ function limpiarCampoFormulario() {
     limpiarActualizarCombobox(true);
 }
 
-/**
- * Agrega un evento al elemento select para ejecutar la función platilloSel() cuando cambie su valor.
- */
 function eventoCombo() {
     const optionCategoria = document.getElementById('optionCategoria');
     optionCategoria.addEventListener('change', (e) => {
@@ -337,16 +297,10 @@ function eventoCombo() {
     });
 }
 
-/**
- * Oculta el modal.
- */
 function ocultarModal() {
     $('#modalInsUpdPlatillo').modal('hide');
 }
 
-/**
- * Modifica el valor de la variable global "idCategoriaGlobal" con el ID de la categoría
- */
 function modificarValorCategoria(idcategoria) {
     idCategoriaGlobal = idcategoria;
 }
