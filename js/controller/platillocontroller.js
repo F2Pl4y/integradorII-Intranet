@@ -92,7 +92,7 @@ function platilloUpd() {
         }
     });
 }
-// window.platilloGet = platilloGet;
+window.platilloGet = platilloGet;
 export function platilloGet(id) {
     const tituloModalPlatillo = document.getElementById('tituloModalPlatillo');
     const btnInsUpdPlatillo = document.getElementById('btnInsUpdPlatillo');
