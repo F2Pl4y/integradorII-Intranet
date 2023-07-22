@@ -84,7 +84,6 @@ function iniciarSesion() {
             }),
             success: function (response) {
                 if (response["mensaje"]) {
-                    console.log(response);
                     setSession(response["mensaje"]);
                     checkSession();
                 } else {
