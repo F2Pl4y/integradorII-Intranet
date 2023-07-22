@@ -151,7 +151,7 @@ function efectoModalAlDesaparecer() {
     });
 }
 
-function accionBtnModal() {
+export function accionBtnModal() {
     const btnInsUpdCategoria = document.getElementById('btnInsUpdCategoria');
     btnInsUpdCategoria.addEventListener('click', (e) => {
         if (evaluarCategoria["NomCategoria"]) {
