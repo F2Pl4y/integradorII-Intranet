@@ -85,7 +85,7 @@ function platilloUpd() {
         processData: false,
         success: function (data) {
             mensajeValidacion(data["mensaje"], data["exito"]);
-            if(data["exito"]){
+            if (data["exito"]) {
                 ocultarModal();
                 platilloSel(idCategoriaGlobal);
             }
@@ -132,7 +132,7 @@ function platilloIns() {
         processData: false,
         success: function (data) {
             mensajeValidacion(data["mensaje"], data["exito"]);
-            if(data["exito"]){
+            if (data["exito"]) {
                 ocultarModal();
                 platilloSel(idCategoriaGlobal);
             }
@@ -207,10 +207,10 @@ function accionBtnModal() {
     const btnInsUpdPlatillo = document.getElementById('btnInsUpdPlatillo');
     btnInsUpdPlatillo.addEventListener('click', (e) => {
         e.preventDefault();
-        if(evaluarPlatillo["nombrePlatillo"] && evaluarPlatillo["imagen"] && evaluarPlatillo["precio"]){
+        if (evaluarPlatillo["nombrePlatillo"] && evaluarPlatillo["imagen"] && evaluarPlatillo["precio"]) {
             if ($('#txtIdPlatillo').val() === '') platilloIns();
             else platilloUpd();
-        }else{
+        } else {
             mensajeValidacion('Existen campos que no se han completado correctamente, por favor revisar el formulario', false);
         }
     })
@@ -224,7 +224,7 @@ function evaluarCampos() {
 
     const txtPrecio = document.getElementById('txtPrecio');
     const iconoPrecio = document.querySelector('#txtPrecio+.icono');
-    
+
     const imagenPlatillo = document.getElementById('imagenPlatillo');
 
     txtNombrePlatillo.addEventListener('keyup', (e) => {
@@ -239,9 +239,9 @@ function evaluarCampos() {
         inputCheck(iconoPrecio, txtPrecio, comprobarPrecio);
     });
 
-    imagenPlatillo.addEventListener('change', (e)=>{
+    imagenPlatillo.addEventListener('change', (e) => {
         const archivo = e.target.files[0];
-        if(archivo != undefined && archivo.size <= 5000000 && formatosArchivo.includes(archivo.type)){
+        if (archivo != undefined && archivo.size <= 5000000 && formatosArchivo.includes(archivo.type)) {
             evaluarPlatillo["imagen"] = true;
         }
     })
@@ -256,19 +256,19 @@ function efectoModalAlDesaparecer() {
 function limpiarActualizarCombobox(boolean, idCategoria = null) {
     const categoriaOptions = document.querySelectorAll('#categoriaSelectRegisterPlatillo>option');
     const categoria = document.getElementById('categoriaSelectRegisterPlatillo');
-    if(boolean){
+    if (boolean) {
         for (let i = 0; i < categoriaOptions.length; i++) {
             const option = categoriaOptions[i];
-            if(i === 0){
+            if (i === 0) {
                 option.setAttribute("selected", "selected");
-            }else{
+            } else {
                 option.removeAttribute("selected");
             }
         }
-    }else{
+    } else {
         for (let i = 0; i < categoriaOptions.length; i++) {
             const option = categoriaOptions[i];
-            if(parseInt(option.value) === idCategoria){
+            if (parseInt(option.value) === idCategoria) {
                 option.setAttribute("selected", "selected");
                 continue;
             }
@@ -276,7 +276,7 @@ function limpiarActualizarCombobox(boolean, idCategoria = null) {
         }
         categoriaSelectRegisterPlatillo.value = idCategoria;
     }
-    
+
 
 }
 
@@ -332,3 +332,5 @@ function limpiarCampoFormulario() {
         evaluarPlatillo[clave] = false;
     }
 }
+
+import { dominio } from '../controllerMain.js';

@@ -262,3 +262,5 @@ function accionBtnModal() {
         }
     })
 }
+
+import { dominio } from '../controllerMain.js';

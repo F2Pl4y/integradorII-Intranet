@@ -9,7 +9,7 @@ const evaluarTrabajador = {
     ArchivoImagen: false
 }
 
-window.addEventListener('load', (e)=>{
+window.addEventListener('load', (e) => {
     efectoTablaController();
     trabajadorSel();
     comboCargos();
@@ -18,7 +18,7 @@ window.addEventListener('load', (e)=>{
     evaluarCampos();
 });
 
-function trabajadorIns(){
+function trabajadorIns() {
     const registrosTrabajador = new FormData();
     registrosTrabajador.append("imagenTrabajador", $('#imagenTrabajador')[0].files[0]);
     registrosTrabajador.append("txtCorreoTrabajador", $('#txtCorreoTrabajador').val());
@@ -36,7 +36,7 @@ function trabajadorIns(){
         processData: false,
         success: function (data) {
             mensajeValidacion(data["mensaje"], data["exito"]);
-            if(data["exito"]){
+            if (data["exito"]) {
                 ocultarModal();
                 trabajadorSel();
             }
@@ -44,7 +44,7 @@ function trabajadorIns(){
     });
 }
 
-function trabajadorUpd(){
+function trabajadorUpd() {
     const registrosTrabajador = new FormData();
     registrosTrabajador.append("imagenTrabajador", $('#imagenTrabajador')[0].files[0]);
     registrosTrabajador.append("txtCorreoTrabajador", $('#txtCorreoTrabajador').val());
@@ -62,7 +62,7 @@ function trabajadorUpd(){
         processData: false,
         success: function (data) {
             mensajeValidacion(data["mensaje"], data["exito"]);
-            if(data["exito"]){
+            if (data["exito"]) {
                 ocultarModal();
                 trabajadorSel();
                 $('#tablaTrabajadores').empty();
@@ -72,16 +72,16 @@ function trabajadorUpd(){
     });
 }
 
-function trabajadorDel(id){
-    mensajeConfirmacion('Eliminar', '¿Seguro que desea eliminar este trabajador?').then((booleano)=>{
-        if(booleano){
+function trabajadorDel(id) {
+    mensajeConfirmacion('Eliminar', '¿Seguro que desea eliminar este trabajador?').then((booleano) => {
+        if (booleano) {
             $.ajax({
                 type: "DELETE",
                 url: `${dominio}/trabajador/del/${id}/`,
                 dataType: "json",
                 success: function (data) {
                     mensajeValidacion(data["mensaje"], data["exito"]);
-                    if(data["exito"]) trabajadorSel();
+                    if (data["exito"]) trabajadorSel();
                 }
             });
         }
@@ -95,99 +95,99 @@ function trabajadorSel(idCargo = undefined) {
         url: ruta,
         dataType: "json",
         success: function (data) {
-            if(data["exito"]){
+            if (data["exito"]) {
                 $('#tablaTrabajadores').empty();
                 $('#resTrabajadorContent').empty();
                 let tabla = '';
-                if(window.innerWidth < 768){
+                if (window.innerWidth < 768) {
                     $.each(data["resultado"], function (llave, valor) {
-                        if(valor["IDCargo"] !== 1){
+                        if (valor["IDCargo"] !== 1) {
                             let template = '<div class="list-group elementTabla">';
-                                template += '<div class="list-group-item list-group-item-action elementTablaCell">';
-                                    template += '<div class="elementTablaCellGroup">';
-                                        template += '<div class="nombreCampoTablaCell">DNI</div>';
-                                        template += `<div class="infoCampoTablaCell">${valor["DNITrabajador"]}</div>`;
-                                    template += '</div>';
-                                    template += '<div class="elementTablaCellGroup">';
-                                        template += '<div class="nombreCampoTablaCell">Accion</div>';
-                                        template += '<div class="infoCampoTablaCell">';
-                                            template += '<div class="btn-group">';
-                                                template += '<button class="btn btn-primary" data-toggle="modal" data-target="#modalInsUpdTrabajador" onclick="trabajadorGet('+ valor["CodTrabajador"] +')">';
-                                                    template += '<i class="bx bx-up-arrow-alt"></i>';
-                                                template += '</button>';
-                                                template += '<button class="btn btn-danger" onclick="trabajadorDel(' + valor["CodTrabajador"] +')">';
-                                                    template += '<i class="bx bx-trash"></i>';
-                                                template += '</button>';
-                                            template += '</div>';
-                                        template += '</div>';
-                                    template += '</div>';
-                                template += '</div>';
-                                template += '<div class="list-group-item list-group-item-action elementTablaCell">';
-                                    template += '<div class="elementTablaCellGroup">';
-                                        template += '<div class="nombreCampoTablaCell">Correo</div>';
-                                        template += `<div class="infoCampoTablaCell">${valor["CorreoTrabajador"]}</div>`;
-                                    template += '</div>';
-                                template += '</div>';
-                                template += '<div class="list-group-item list-group-item-action elementTablaCell">';
-                                    template += '<div class="elementTablaCellGroup">';
-                                        template += '<div class="nombreCampoTablaCell">Nombre</div>';
-                                        template += `<div class="infoCampoTablaCell">${valor["NomTrabajador"]}</div>`
-                                    template += '</div>';
-                                template += '</div>';
-                                template += '<div class="list-group-item list-group-item-action elementTablaCell">';
-                                    template += '<div class="elementTablaCellGroup">';
-                                        template += '<div class="nombreCampoTablaCell">Telefono</div>';
-                                        template += `<div class="infoCampoTablaCell">${valor["TelefonoTrabajador"]}</div>`
-                                    template += '</div>';
-                                template += '</div>';
-                                template += '<div class="list-group-item list-group-item-action elementTablaCell">';
-                                    template += '<div class="elementTablaCellGroup">';
-                                        template += '<div class="nombreCampoTablaCell">Direccion</div>';
-                                        template += `<div class="infoCampoTablaCell">${valor["DireccionTrabajador"]}</div>`
-                                    template += '</div>';
-                                template += '</div>';
-                                template += '<div class="list-group-item list-group-item-action elementTablaCell">';
-                                    template += '<div class="elementTablaCellGroup">';
-                                        template += '<div class="nombreCampoTablaCell">Foto</div>';
-                                        template += `<div class="infoCampoTablaCell">`
-                                            template += `<img src="${dominio}/trabajador/foto/${valor["CodTrabajador"]}/" alt="" class="imgTrabajador">`;
-                                        template += '</div>';
-                                    template += '</div>';
-                                template += '</div>';
-                                template += '<div class="list-group-item list-group-item-action elementTablaCell">';
-                                    template += '<div class="elementTablaCellGroup">';
-                                        template += '<div class="nombreCampoTablaCell">Cargo</div>';
-                                        template += `<div class="infoCampoTablaCell">${valor["NomCargo"]}</div>`
-                                    template += '</div>';
-                                template += '</div>';
+                            template += '<div class="list-group-item list-group-item-action elementTablaCell">';
+                            template += '<div class="elementTablaCellGroup">';
+                            template += '<div class="nombreCampoTablaCell">DNI</div>';
+                            template += `<div class="infoCampoTablaCell">${valor["DNITrabajador"]}</div>`;
+                            template += '</div>';
+                            template += '<div class="elementTablaCellGroup">';
+                            template += '<div class="nombreCampoTablaCell">Accion</div>';
+                            template += '<div class="infoCampoTablaCell">';
+                            template += '<div class="btn-group">';
+                            template += '<button class="btn btn-primary" data-toggle="modal" data-target="#modalInsUpdTrabajador" onclick="trabajadorGet(' + valor["CodTrabajador"] + ')">';
+                            template += '<i class="bx bx-up-arrow-alt"></i>';
+                            template += '</button>';
+                            template += '<button class="btn btn-danger" onclick="trabajadorDel(' + valor["CodTrabajador"] + ')">';
+                            template += '<i class="bx bx-trash"></i>';
+                            template += '</button>';
+                            template += '</div>';
+                            template += '</div>';
+                            template += '</div>';
+                            template += '</div>';
+                            template += '<div class="list-group-item list-group-item-action elementTablaCell">';
+                            template += '<div class="elementTablaCellGroup">';
+                            template += '<div class="nombreCampoTablaCell">Correo</div>';
+                            template += `<div class="infoCampoTablaCell">${valor["CorreoTrabajador"]}</div>`;
+                            template += '</div>';
+                            template += '</div>';
+                            template += '<div class="list-group-item list-group-item-action elementTablaCell">';
+                            template += '<div class="elementTablaCellGroup">';
+                            template += '<div class="nombreCampoTablaCell">Nombre</div>';
+                            template += `<div class="infoCampoTablaCell">${valor["NomTrabajador"]}</div>`
+                            template += '</div>';
+                            template += '</div>';
+                            template += '<div class="list-group-item list-group-item-action elementTablaCell">';
+                            template += '<div class="elementTablaCellGroup">';
+                            template += '<div class="nombreCampoTablaCell">Telefono</div>';
+                            template += `<div class="infoCampoTablaCell">${valor["TelefonoTrabajador"]}</div>`
+                            template += '</div>';
+                            template += '</div>';
+                            template += '<div class="list-group-item list-group-item-action elementTablaCell">';
+                            template += '<div class="elementTablaCellGroup">';
+                            template += '<div class="nombreCampoTablaCell">Direccion</div>';
+                            template += `<div class="infoCampoTablaCell">${valor["DireccionTrabajador"]}</div>`
+                            template += '</div>';
+                            template += '</div>';
+                            template += '<div class="list-group-item list-group-item-action elementTablaCell">';
+                            template += '<div class="elementTablaCellGroup">';
+                            template += '<div class="nombreCampoTablaCell">Foto</div>';
+                            template += `<div class="infoCampoTablaCell">`
+                            template += `<img src="${dominio}/trabajador/foto/${valor["CodTrabajador"]}/" alt="" class="imgTrabajador">`;
+                            template += '</div>';
+                            template += '</div>';
+                            template += '</div>';
+                            template += '<div class="list-group-item list-group-item-action elementTablaCell">';
+                            template += '<div class="elementTablaCellGroup">';
+                            template += '<div class="nombreCampoTablaCell">Cargo</div>';
+                            template += `<div class="infoCampoTablaCell">${valor["NomCargo"]}</div>`
+                            template += '</div>';
+                            template += '</div>';
                             template += '</div>'
                             tabla += template;
                         }
                     });
                     $('#resTrabajadorContent').html(tabla);
-                }else{
+                } else {
                     $.each(data["resultado"], function (llave, valor) {
-                        if(valor["IDCargo"] !== 1){
+                        if (valor["IDCargo"] !== 1) {
                             let template = '<tr>';
-                                template += '<td>' + valor["NomTrabajador"] + '</td>';
-                                template += '<td>' + valor["CorreoTrabajador"] + '</td>';
-                                template += '<td>' + valor["DNITrabajador"] + '</td>';
-                                template += '<td>' + valor["TelefonoTrabajador"] + '</td>';
-                                template += '<td>' + valor["DireccionTrabajador"] + '</td>';
-                                template += '<td>' + valor["NomCargo"] + '</td>';
-                                template += '<td>';
-                                    template += `<img src="${dominio}/trabajador/foto/${valor["CodTrabajador"]}/" alt="imagenPlatillo" class="imgTrabajador">`;
-                                template += '</td>';
-                                template += '<td class="grupoBotones">';
-                                    template += '<div class="btn-group">';
-                                        template += '<button class="btn btn-primary" data-toggle="modal" data-target="#modalInsUpdTrabajador" onclick="trabajadorGet('+ valor["CodTrabajador"] +')">';
-                                            template += '<i class="bx bx-up-arrow-alt"></i>';
-                                        template += '</button>';
-                                        template += '<button class="btn btn-danger" onclick="trabajadorDel(' + valor["CodTrabajador"] +')">';
-                                            template += '<i class="bx bx-trash"></i>';
-                                        template += '</button>';
-                                    template += '</div>';
-                                template += '</td>';
+                            template += '<td>' + valor["NomTrabajador"] + '</td>';
+                            template += '<td>' + valor["CorreoTrabajador"] + '</td>';
+                            template += '<td>' + valor["DNITrabajador"] + '</td>';
+                            template += '<td>' + valor["TelefonoTrabajador"] + '</td>';
+                            template += '<td>' + valor["DireccionTrabajador"] + '</td>';
+                            template += '<td>' + valor["NomCargo"] + '</td>';
+                            template += '<td>';
+                            template += `<img src="${dominio}/trabajador/foto/${valor["CodTrabajador"]}/" alt="imagenPlatillo" class="imgTrabajador">`;
+                            template += '</td>';
+                            template += '<td class="grupoBotones">';
+                            template += '<div class="btn-group">';
+                            template += '<button class="btn btn-primary" data-toggle="modal" data-target="#modalInsUpdTrabajador" onclick="trabajadorGet(' + valor["CodTrabajador"] + ')">';
+                            template += '<i class="bx bx-up-arrow-alt"></i>';
+                            template += '</button>';
+                            template += '<button class="btn btn-danger" onclick="trabajadorDel(' + valor["CodTrabajador"] + ')">';
+                            template += '<i class="bx bx-trash"></i>';
+                            template += '</button>';
+                            template += '</div>';
+                            template += '</td>';
                             template += '</tr>';
                             tabla += template;
                         }
@@ -199,7 +199,7 @@ function trabajadorSel(idCargo = undefined) {
     });
 }
 
-function trabajadorGet(id){
+function trabajadorGet(id) {
     const tituloModalPlatillo = document.getElementById('tituloModalTrabajador');
     const btnInsUpdPlatillo = document.getElementById('btnInsUpdTrabajador');
     tituloModalPlatillo.innerText = 'Actualizar trabajador';
@@ -230,14 +230,14 @@ function trabajadorGet(id){
     });
 }
 
-function comboCargos(){
+function comboCargos() {
     $.ajax({
         type: "GET",
         url: `${dominio}/cargo/sel/1/`,
         dataType: "json",
         success: function (data) {
             let contenido = '';
-            if(data["exito"] === true){
+            if (data["exito"] === true) {
                 $.each(data["resultado"], function (llave, valor) {
                     let template = `<option value="${valor["IDCargo"]}">`;
                     template += `${valor["NomCargo"]}`;
@@ -255,10 +255,10 @@ function accionBtnModal() {
     const btnInsUpdTrabajador = document.getElementById('btnInsUpdTrabajador');
     btnInsUpdTrabajador.addEventListener('click', (e) => {
         e.preventDefault();
-        if(evaluarTrabajador["CorreoTrabajador"] && evaluarTrabajador["DniTrabajador"] && evaluarTrabajador["NomTrabajador"] && evaluarTrabajador["direccionTrabajador"] && evaluarTrabajador["PasswordTrabajador"] && evaluarTrabajador["PasswordTrabajadorRepetir"] && evaluarTrabajador["telefonoTrabajador"] && evaluarTrabajador["ArchivoImagen"]){
+        if (evaluarTrabajador["CorreoTrabajador"] && evaluarTrabajador["DniTrabajador"] && evaluarTrabajador["NomTrabajador"] && evaluarTrabajador["direccionTrabajador"] && evaluarTrabajador["PasswordTrabajador"] && evaluarTrabajador["PasswordTrabajadorRepetir"] && evaluarTrabajador["telefonoTrabajador"] && evaluarTrabajador["ArchivoImagen"]) {
             if ($('#txtCodTrabajador').val() === '') trabajadorIns();
             else trabajadorUpd();
-        }else{
+        } else {
             mensajeValidacion('Existen campos que no se han completado correctamente, por favor revisar el formulario', false);
         }
     })
@@ -326,15 +326,15 @@ function evaluarCampos() {
         inputCheck(iconoTelefonoTrabajador, txtTelefonoTrabajador, comprobarTelefonoTrabajador);
     });
 
-    imagenTrabajador.addEventListener('change', (e)=>{
+    imagenTrabajador.addEventListener('change', (e) => {
         const archivo = e.target.files[0];
-        if(archivo != undefined && archivo.size <= 5000000 && formatosArchivo.includes(archivo.type)){
+        if (archivo != undefined && archivo.size <= 5000000 && formatosArchivo.includes(archivo.type)) {
             evaluarTrabajador["ArchivoImagen"] = true;
         }
     })
 }
 
-function efectoTablaController(){
+function efectoTablaController() {
     $(document).ready(function () {
         $("#inputTrabajador").on("keyup", function () {
             var value = $(this).val().toLowerCase();
@@ -349,7 +349,7 @@ function ocultarModal() {
     $('#modalInsUpdTrabajador').modal('hide');
 }
 
-function efectoModalAlDesaparecer(){
+function efectoModalAlDesaparecer() {
     $('#modalInsUpdTrabajador').on('hide.bs.modal', function (e) {
         const txtPassword = document.getElementById('txtPassword');
         const txtPasswordRepetir = document.getElementById('txtPasswordRepetir');
@@ -422,3 +422,5 @@ function limpiarCampoFormulario() {
         evaluarTrabajador[clave] = false;
     }
 }
+
+import { dominio } from '../controllerMain.js';
