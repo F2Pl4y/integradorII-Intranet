@@ -39,7 +39,8 @@ function categoriaSel() {
     });
 }
 
-function categoriaGet(id) {
+window.categoriaGet = categoriaGet;
+export function categoriaGet(id) {
     const tituloModalCategoria = document.getElementById('tituloModalCategoria');
     const btnInsUpdCategoria = document.getElementById('btnInsUpdCategoria');
     tituloModalCategoria.innerText = 'Actualizar categoria';
