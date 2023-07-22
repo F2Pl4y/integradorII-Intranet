@@ -198,8 +198,8 @@ function trabajadorSel(idCargo = undefined) {
         }
     });
 }
-
-function trabajadorGet(id) {
+window.trabajadorGet = trabajadorGet;
+export function trabajadorGet(id) {
     const tituloModalPlatillo = document.getElementById('tituloModalTrabajador');
     const btnInsUpdPlatillo = document.getElementById('btnInsUpdTrabajador');
     tituloModalPlatillo.innerText = 'Actualizar trabajador';
@@ -423,4 +423,4 @@ function limpiarCampoFormularioTrabajador() {
     }
 }
 
-import { dominio, expresiones } from '../controllerMain.js';
+import { dominio, expresiones, inputCheck } from '../controllerMain.js';

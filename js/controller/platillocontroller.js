@@ -333,4 +333,4 @@ function limpiarCampoFormularioPlatillo() {
     }
 }
 
-import { dominio, expresiones } from '../controllerMain.js';
+import { dominio, expresiones, inputCheck } from '../controllerMain.js';
