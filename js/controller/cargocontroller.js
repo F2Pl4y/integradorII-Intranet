@@ -55,7 +55,8 @@ function cargoSel() {
  * @param id - El id del cargo a buscar
  * @returns
  */
-function cargoGet(id) {
+window.cargoGet = cargoGet;
+export function cargoGet(id) {
     const tituloModalcargo = document.getElementById('tituloModalcargo');
     const btnInsUpdCargo = document.getElementById('btnInsUpdCargo');
     tituloModalcargo.innerText = 'Actualizar cargo';
