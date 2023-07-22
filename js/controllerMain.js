@@ -1,4 +1,5 @@
-export const dominio = 'https://f3rn4nd021py.pythonanywhere.com';
+// export const dominio = 'https://f3rn4nd021py.pythonanywhere.com';
+export const dominio = 'http://127.0.0.1:5000';
 
 export const expresiones = {
     nombreCargo: /^[\w,\s]{5,30}$/,
