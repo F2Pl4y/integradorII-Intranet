@@ -1,9 +1,10 @@
-export function dominioFun() {
-    // return 'http://127.0.0.1:5000/';
-    return 'https://f3rn4nd021py.pythonanywhere.com/';
-}
+// export function dominio() {
+//     // return 'http://127.0.0.1:5000/';
+//     return 'https://f3rn4nd021py.pythonanywhere.com/';
+// }
+export const dominio = 'http://127.0.0.1:5000/';
 
-const expresiones = {
+export const expresiones = {
     nombreCargo: /^[\w,\s]{5,30}$/,
     nombreCategoria: /^[\w,\s]{5,50}$/,
     nombrePlatillo: /^[\w,\s]{5,100}$/,
@@ -43,7 +44,7 @@ function efectoInputImg() {
     });
 }
 
-function inputCheck(icono, input, boolean) {
+export function inputCheck(icono, input, boolean) {
     if (boolean) {
         icono.classList.add("positivo");
         icono.classList.remove("negativo");
