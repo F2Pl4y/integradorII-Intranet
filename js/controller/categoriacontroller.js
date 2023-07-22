@@ -115,10 +115,10 @@ function categoriaDel(id) {
 /**
  * Funciones extra
  */
-function limpiarCampoFormulario() {
-    $('#txtIdCategoria').val('');
-    $('#txtNomCategoria').val('');
-}
+// function limpiarCampoFormularioCategoria() {
+//     $('#txtIdCategoria').val('');
+//     $('#txtNomCategoria').val('');
+// }
 
 function ocultarModal() {
     $('#modalInsUpdCategoria').modal('hide');
@@ -146,7 +146,7 @@ function evaluarCampos() {
 
 function efectoModalAlDesaparecer() {
     $('#modalInsUpdCategoria').on('hide.bs.modal', function (e) {
-        limpiarCampoFormulario();
+        limpiarCampoFormularioCategoria();
     });
 }
 
@@ -162,7 +162,7 @@ function accionBtnModal() {
     })
 }
 
-function limpiarCampoFormulario() {
+function limpiarCampoFormularioCategoria() {
     $('#txtIdCategoria').val('');
 
     $('#txtNomCategoria').val('');

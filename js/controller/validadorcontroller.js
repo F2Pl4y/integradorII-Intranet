@@ -117,4 +117,4 @@ function evaluarCampos() {
     });
 
 }
-import { dominio, expresiones, inputCheck } from '../controllerMain.js';
+import { dominio, expresiones, inputCheck, mensajeConfirmacion } from '../controllerMain.js';

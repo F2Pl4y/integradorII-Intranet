@@ -27,8 +27,8 @@ function efectoBusquedaPlatillo() {
         });
     });
 }
-
-function platilloSel(idCategoria = null) {
+window.platilloSel = platilloSel;
+export function platilloSel(idCategoria = null) {
     const url = idCategoria === null ? `${dominio}/platillo/sel/` : `${dominio}/platillo/sel/${idCategoria}`;
     $.ajax({
         type: "GET",
@@ -92,8 +92,8 @@ function platilloUpd() {
         }
     });
 }
-
-function platilloGet(id) {
+// window.platilloGet = platilloGet;
+export function platilloGet(id) {
     const tituloModalPlatillo = document.getElementById('tituloModalPlatillo');
     const btnInsUpdPlatillo = document.getElementById('btnInsUpdPlatillo');
     tituloModalPlatillo.innerText = 'Actualizar platillo';
@@ -249,7 +249,7 @@ function evaluarCampos() {
 
 function efectoModalAlDesaparecer() {
     $('#modalInsUpdPlatillo').on('hide.bs.modal', function (e) {
-        limpiarCampoFormulario();
+        limpiarCampoFormularioPlatillo();
     });
 }
 
@@ -280,14 +280,14 @@ function limpiarActualizarCombobox(boolean, idCategoria = null) {
 
 }
 
-function limpiarCampoFormulario() {
-    $('#txtIdPlatillo').val('');
-    $('#txtNombrePlatillo').val('');
-    $('#txtDescripcion').val('');
-    $('#txtPrecio').val('');
-    $('#imagenPlatillo').val(null);
-    limpiarActualizarCombobox(true);
-}
+// function limpiarCampoFormularioPlatillo() {
+//     $('#txtIdPlatillo').val('');
+//     $('#txtNombrePlatillo').val('');
+//     $('#txtDescripcion').val('');
+//     $('#txtPrecio').val('');
+//     $('#imagenPlatillo').val(null);
+//     limpiarActualizarCombobox(true);
+// }
 
 function eventoCombo() {
     const optionCategoria = document.getElementById('optionCategoria');
@@ -305,7 +305,7 @@ function modificarValorCategoria(idcategoria) {
     idCategoriaGlobal = idcategoria;
 }
 
-function limpiarCampoFormulario() {
+function limpiarCampoFormularioPlatillo() {
     $('#txtIdPlatillo').val('');
 
     $('#txtNombrePlatillo').val('');

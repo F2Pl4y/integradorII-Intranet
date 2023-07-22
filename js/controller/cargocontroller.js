@@ -158,7 +158,7 @@ function cargoDel(id) {
  * @param
  * @returns
  */
-function limpiarCampoFormulario() {
+function limpiarCampoFormularioCargo() {
     $('#txtIdCargo').val('')
     $('#txtIdcargo').removeClass('positivo');
     $('#txtIdcargo').removeClass('negativo');
@@ -241,7 +241,7 @@ function btnAgregarModal() {
  */
 function efectoModalDesaparecer() {
     $('#modalInsUpdCargo').on('hide.bs.modal', function (e) {
-        limpiarCampoFormulario();
+        limpiarCampoFormularioCargo();
     });
 }
 

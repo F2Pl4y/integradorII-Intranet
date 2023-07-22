@@ -1,8 +1,4 @@
-// export function dominio() {
-//     // return 'http://127.0.0.1:5000/';
-//     return 'https://f3rn4nd021py.pythonanywhere.com/';
-// }
-export const dominio = 'http://127.0.0.1:5000/';
+export const dominio = 'http://127.0.0.1:5000';
 
 export const expresiones = {
     nombreCargo: /^[\w,\s]{5,30}$/,
@@ -60,7 +56,7 @@ export function inputCheck(icono, input, boolean) {
     }
 }
 
-function mensajeValidacion(mensaje, validacion) {
+export function mensajeValidacion(mensaje, validacion) {
     const config = {
         title: validacion ? 'Exito' : 'Error',
         text: mensaje,
@@ -71,7 +67,7 @@ function mensajeValidacion(mensaje, validacion) {
     Swal.fire(config);
 }
 
-function mensajeConfirmacion(titulo, mensaje) {
+export function mensajeConfirmacion(titulo, mensaje) {
     return new Promise((resolve) => {
         Swal.fire({
             title: titulo,

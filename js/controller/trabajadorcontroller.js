@@ -359,11 +359,11 @@ function efectoModalAlDesaparecer() {
         lblPasswordRepetir.style.display = "block";
         txtPassword.style.display = "block";
         txtPasswordRepetir.style.display = "block";
-        limpiarCampoFormulario();
+        limpiarCampoFormularioTrabajador();
     });
 }
 
-function limpiarCampoFormulario() {
+function limpiarCampoFormularioTrabajador() {
     $('#txtCodTrabajador').val('');
 
     $('#txtCorreoTrabajador').val('');
