@@ -97,6 +97,7 @@ function categoriaUpd() {
     });
 }
 
+window.categoriaDel = categoriaDel;
 function categoriaDel(id) {
     mensajeConfirmacion('Eliminar', '¿Seguro que desea eliminar este trabajador?').then((booleano) => {
         if (booleano) {
