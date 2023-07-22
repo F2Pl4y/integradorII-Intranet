@@ -2,5 +2,5 @@ projectKey=integradorII-Intranet
 serverUrl=http://localhost:9000
 serverVersion=10.1.0.73491
 dashboardUrl=http://localhost:9000/dashboard?id=integradorII-Intranet
-ceTaskId=AYl2ctgo4sFNe2LPvI09
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AYl2ctgo4sFNe2LPvI09
+ceTaskId=AYl772BOaCUoPohTj5oY
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYl772BOaCUoPohTj5oY
