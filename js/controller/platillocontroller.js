@@ -139,8 +139,8 @@ function platilloIns() {
         }
     });
 }
-
-function platilloDel(idPlatillo) {
+window.platilloDel = platilloDel;
+export function platilloDel(idPlatillo) {
     $.ajax({
         type: "DELETE",
         url: `${dominio}/platillo/del/${idPlatillo}/`,
@@ -333,4 +333,4 @@ function limpiarCampoFormularioPlatillo() {
     }
 }
 
-import { dominio, expresiones, inputCheck } from '../controllerMain.js';
+import { dominio, expresiones, inputCheck, mensajeValidacion } from '../controllerMain.js';
