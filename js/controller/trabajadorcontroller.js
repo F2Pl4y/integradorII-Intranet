@@ -423,4 +423,4 @@ function limpiarCampoFormularioTrabajador() {
     }
 }
 
-import { dominio } from '../controllerMain.js';
+import { dominio, expresiones } from '../controllerMain.js';

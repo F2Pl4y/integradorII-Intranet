@@ -264,4 +264,4 @@ function accionBtnModal() {
     })
 }
 
-import { dominio } from '../controllerMain.js';
+import { dominio, expresiones } from '../controllerMain.js';
