@@ -1,9 +1,13 @@
-const dominio = 'http://127.0.0.1:5000';
+// const dominio = 'http://127.0.0.1:5000';
+export function dominioFun() {
+    // return 'http://127.0.0.1:5000/';
+    return 'https://f3rn4nd021py.pythonanywhere.com/';
+}
 
 const expresiones = {
     nombreCargo: /^[\w,\s]{5,30}$/,
     nombreCategoria: /^[\w,\s]{5,50}$/,
-    nombrePlatillo : /^[\w,\s]{5,100}$/,
+    nombrePlatillo: /^[\w,\s]{5,100}$/,
     dinero: /^\d+(.(\d{1,2})?)?$/,
     correo: /^([a-zA-Z0-9_.+-]{1,}@[\w-]+\.+[a-zA-Z0-9-.]+){1,240}$/,
     dni: /^\d{8}$/,
