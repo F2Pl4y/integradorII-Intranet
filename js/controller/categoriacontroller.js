@@ -176,4 +176,4 @@ function limpiarCampoFormularioCategoria() {
     evaluarCategoria["NomCategoria"] = false;
 }
 
-import { dominio, expresiones, inputCheck } from '../controllerMain.js';
+import { dominio, expresiones, inputCheck, mensajeValidacion } from '../controllerMain.js';
