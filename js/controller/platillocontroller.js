@@ -47,9 +47,9 @@ export function platilloSel(idCategoria = null) {
                     template += `<div class="info">`;
                     template += `<h3>${valor["NombrePlatillo"]}</h3>`;
                     template += `<div class="botones">`;
-                    template += `<button type="button" class="btn btn-warning">`;
-                    template += `<i class='bx bx-info-circle'></i>`;
-                    template += `</button>`;
+                    // template += `<button type="button" class="btn btn-warning">`;
+                    // template += `<i class='bx bx-info-circle'></i>`;
+                    // template += `</button>`;
                     template += `<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalInsUpdPlatillo" onclick="platilloGet(${valor["CodigoPlatillo"]})">`;
                     template += `<i class='bx bx-up-arrow-alt'></i>`;
                     template += `</button>`;
