@@ -87,14 +87,15 @@ function trabajadorDel(id) {
         }
     });
 }
-
 function trabajadorSel(idCargo = undefined) {
+    console.log(idCargo);
     const ruta = idCargo == undefined ? `${dominio}/trabajador/cargo/` : `${dominio}/trabajador/cargo/${idCategoria}/`
     $.ajax({
         type: "GET",
         url: ruta,
         dataType: "json",
         success: function (data) {
+
             if (data["exito"]) {
                 $('#tablaTrabajadores').empty();
                 $('#resTrabajadorContent').empty();
@@ -183,6 +184,7 @@ function trabajadorSel(idCargo = undefined) {
                             template += '<button class="btn btn-primary" data-toggle="modal" data-target="#modalInsUpdTrabajador" onclick="trabajadorGet(' + valor["CodTrabajador"] + ')">';
                             template += '<i class="bx bx-up-arrow-alt"></i>';
                             template += '</button>';
+
                             template += '<button class="btn btn-danger" onclick="trabajadorDel(' + valor["CodTrabajador"] + ')">';
                             template += '<i class="bx bx-trash"></i>';
                             template += '</button>';

@@ -9,6 +9,7 @@ window.addEventListener('load', (e) => {
     btnAgregarModal();
     evaluarCampos();
     accionBtnModal();
+    insPuntaje();
 })
 
 
@@ -137,6 +138,7 @@ function cargoUpd() {
  * @param id - El id del cargo a eliminar
  * @returns
  */
+window.cargoDel = cargoDel;
 function cargoDel(id) {
     mensajeConfirmacion('Eliminar', '¿Seguro que desea eliminar este cargo?').then((booleano) => {
         if (booleano) {
@@ -264,4 +266,88 @@ function accionBtnModal() {
     })
 }
 
-import { dominio, expresiones, inputCheck, mensajeValidacion } from '../controllerMain.js';
+
+
+// -------- inicio de puntaje --------
+
+
+function puntajeIns() {
+    const registroscargo = new FormData();
+    console.log("ESTO VALE: ", puntaje);
+    registroscargo.append('puntaje', puntaje);
+    // registroscargo.append(puntaje);
+    $.ajax({
+        type: "POST",
+        url: dominio + "/puntaje/ins/",
+        data: registroscargo,
+        dataType: "json",
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            mensajeValidacion(data["mensaje"], data["exito"]);
+            if (data["exito"]) {
+                ocultarModal();
+                cargoSel();
+            }
+        }
+    });
+
+}
+
+let puntaje = document.querySelectorAll(".stars i.active").length;
+function insPuntaje() {
+    const btnInsUpdCargo = document.getElementById('btnAgregarPuntaje');
+    // Select all elements with the "i" tag and store them in a NodeList called "stars"
+    const stars = document.querySelectorAll(".stars i");
+
+
+    const mensajeElement = document.getElementById("mensaje");
+    // Define los mensajes para cada cantidad de estrellas seleccionadas
+    const mensajes = [
+        "¡Terrible!",
+        "¡Malo!",
+        "¡Regular!",
+        "¡Bueno!",
+        "¡Excelente!",
+        "¡Terrible!"
+    ];
+    // Loop through the "stars" NodeList
+    stars.forEach((star, index1) => {
+        // Add an event listener that runs a function when the "click" event is triggered
+        star.addEventListener("click", () => {
+            // Contar estrellas activas para obtener el puntaje
+            // Loop through the "stars" NodeList Again
+            stars.forEach((star, index2) => {
+                // Add the "active" class to the clicked star and any stars with a lower index
+                // and remove the "active" class from any stars with a higher index
+                index1 >= index2 ? star.classList.add("active") : star.classList.remove("active");
+            });
+            puntaje = document.querySelectorAll(".stars i.active").length;
+
+            // Mostrar el puntaje en console.log()
+            // console.log(`Puntaje: ${puntaje}`);
+
+            mensajeElement.textContent = mensajes[puntaje - 1];
+
+            btnInsUpdCargo.addEventListener('click', (e) => {
+                if (puntaje != 0 && puntaje != null) {
+                    // if ($('#txtIdCargo').val() === '') cargoIns();
+                    puntajeIns();
+                    // console.log("el puntaje es: ", puntaje);
+                } else {
+                    console.log("no hay puntaje");
+                }
+            })
+        });
+    });
+}
+
+
+
+
+
+
+
+
+// -------- fin de puntaje --------
+import { dominio, expresiones, inputCheck, mensajeValidacion, mensajeConfirmacion } from '../controllerMain.js';
