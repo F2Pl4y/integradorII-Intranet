@@ -88,7 +88,6 @@ function trabajadorDel(id) {
     });
 }
 function trabajadorSel(idCargo = undefined) {
-    console.log(idCargo);
     const ruta = idCargo == undefined ? `${dominio}/trabajador/cargo/` : `${dominio}/trabajador/cargo/${idCategoria}/`
     $.ajax({
         type: "GET",
@@ -232,7 +231,7 @@ export function trabajadorGet(id) {
     });
 }
 
-function comboCargos() {
+export function comboCargos() {
     $.ajax({
         type: "GET",
         url: `${dominio}/cargo/sel/1/`,
@@ -254,86 +253,90 @@ function comboCargos() {
 }
 
 function accionBtnModal() {
-    const btnInsUpdTrabajador = document.getElementById('btnInsUpdTrabajador');
-    btnInsUpdTrabajador.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (evaluarTrabajador["CorreoTrabajador"] && evaluarTrabajador["DniTrabajador"] && evaluarTrabajador["NomTrabajador"] && evaluarTrabajador["direccionTrabajador"] && evaluarTrabajador["PasswordTrabajador"] && evaluarTrabajador["PasswordTrabajadorRepetir"] && evaluarTrabajador["telefonoTrabajador"] && evaluarTrabajador["ArchivoImagen"]) {
-            if ($('#txtCodTrabajador').val() === '') trabajadorIns();
-            else trabajadorUpd();
-        } else {
-            mensajeValidacion('Existen campos que no se han completado correctamente, por favor revisar el formulario', false);
-        }
-    })
+    if (window.location.pathname === "/pages/trabajador.html") {
+        const btnInsUpdTrabajador = document.getElementById('btnInsUpdTrabajador');
+        btnInsUpdTrabajador.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (evaluarTrabajador["CorreoTrabajador"] && evaluarTrabajador["DniTrabajador"] && evaluarTrabajador["NomTrabajador"] && evaluarTrabajador["direccionTrabajador"] && evaluarTrabajador["PasswordTrabajador"] && evaluarTrabajador["PasswordTrabajadorRepetir"] && evaluarTrabajador["telefonoTrabajador"] && evaluarTrabajador["ArchivoImagen"]) {
+                if ($('#txtCodTrabajador').val() === '') trabajadorIns();
+                else trabajadorUpd();
+            } else {
+                mensajeValidacion('Existen campos que no se han completado correctamente, por favor revisar el formulario', false);
+            }
+        });
+    }
 }
 
 function evaluarCampos() {
-    const formatosArchivo = ['image/jpeg', 'image/jpg', 'image/png']
+    if (window.location.pathname === "/pages/trabajador.html") {
+        const formatosArchivo = ['image/jpeg', 'image/jpg', 'image/png']
 
-    const txtCorreoTrabajador = document.getElementById('txtCorreoTrabajador');
-    const iconoCorreoTrabajador = document.querySelector('#txtCorreoTrabajador+.icono');
-    const txtPassword = document.getElementById('txtPassword');
-    const iconoPassword = document.querySelector('#txtPassword+.icono');
-    const txtNomTrabajador = document.getElementById('txtNomTrabajador');
-    const iconoNomTrabajador = document.querySelector('#txtNomTrabajador+.icono');
-    const txtDireccionTrabajador = document.getElementById('txtDireccionTrabajador');
-    const iconoDireccionTrabajador = document.querySelector('#txtDireccionTrabajador+.icono');
-    const txtDNITrabajador = document.getElementById('txtDNITrabajador');
-    const iconoDNITrabajador = document.querySelector('#txtDNITrabajador+.icono');
-    const txtPasswordRepetir = document.getElementById('txtPasswordRepetir');
-    const iconoPasswordRepetir = document.querySelector('#txtPasswordRepetir+.icono');
-    const txtTelefonoTrabajador = document.getElementById('txtTelefonoTrabajador');
-    const iconoTelefonoTrabajador = document.querySelector('#txtTelefonoTrabajador+.icono');
-    const imagenTrabajador = document.getElementById('imagenTrabajador');
+        const txtCorreoTrabajador = document.getElementById('txtCorreoTrabajador');
+        const iconoCorreoTrabajador = document.querySelector('#txtCorreoTrabajador+.icono');
+        const txtPassword = document.getElementById('txtPassword');
+        const iconoPassword = document.querySelector('#txtPassword+.icono');
+        const txtNomTrabajador = document.getElementById('txtNomTrabajador');
+        const iconoNomTrabajador = document.querySelector('#txtNomTrabajador+.icono');
+        const txtDireccionTrabajador = document.getElementById('txtDireccionTrabajador');
+        const iconoDireccionTrabajador = document.querySelector('#txtDireccionTrabajador+.icono');
+        const txtDNITrabajador = document.getElementById('txtDNITrabajador');
+        const iconoDNITrabajador = document.querySelector('#txtDNITrabajador+.icono');
+        const txtPasswordRepetir = document.getElementById('txtPasswordRepetir');
+        const iconoPasswordRepetir = document.querySelector('#txtPasswordRepetir+.icono');
+        const txtTelefonoTrabajador = document.getElementById('txtTelefonoTrabajador');
+        const iconoTelefonoTrabajador = document.querySelector('#txtTelefonoTrabajador+.icono');
+        const imagenTrabajador = document.getElementById('imagenTrabajador');
 
-    txtCorreoTrabajador.addEventListener('keyup', (e) => {
-        const comprobarCorreo = expresiones["correo"].test(txtCorreoTrabajador.value);
-        evaluarTrabajador["CorreoTrabajador"] = comprobarCorreo;
-        inputCheck(iconoCorreoTrabajador, txtCorreoTrabajador, comprobarCorreo);
-    });
+        txtCorreoTrabajador.addEventListener('keyup', (e) => {
+            const comprobarCorreo = expresiones["correo"].test(txtCorreoTrabajador.value);
+            evaluarTrabajador["CorreoTrabajador"] = comprobarCorreo;
+            inputCheck(iconoCorreoTrabajador, txtCorreoTrabajador, comprobarCorreo);
+        });
 
-    txtPassword.addEventListener('keyup', (e) => {
-        const comprobarPassword = expresiones["password"].test(txtPassword.value);
-        evaluarTrabajador["PasswordTrabajador"] = comprobarPassword;
-        inputCheck(iconoPassword, txtPassword, comprobarPassword);
-        inputCheck(iconoPasswordRepetir, txtPasswordRepetir, txtPasswordRepetir.value === txtPassword.value);
-    });
+        txtPassword.addEventListener('keyup', (e) => {
+            const comprobarPassword = expresiones["password"].test(txtPassword.value);
+            evaluarTrabajador["PasswordTrabajador"] = comprobarPassword;
+            inputCheck(iconoPassword, txtPassword, comprobarPassword);
+            inputCheck(iconoPasswordRepetir, txtPasswordRepetir, txtPasswordRepetir.value === txtPassword.value);
+        });
 
-    txtNomTrabajador.addEventListener('keyup', (e) => {
-        const comprobarNomTrabajador = expresiones["nombreTrabajador"].test(txtNomTrabajador.value);
-        evaluarTrabajador["NomTrabajador"] = comprobarNomTrabajador;
-        inputCheck(iconoNomTrabajador, txtNomTrabajador, comprobarNomTrabajador);
-    });
+        txtNomTrabajador.addEventListener('keyup', (e) => {
+            const comprobarNomTrabajador = expresiones["nombreTrabajador"].test(txtNomTrabajador.value);
+            evaluarTrabajador["NomTrabajador"] = comprobarNomTrabajador;
+            inputCheck(iconoNomTrabajador, txtNomTrabajador, comprobarNomTrabajador);
+        });
 
-    txtDireccionTrabajador.addEventListener('keyup', (e) => {
-        const comprobarDireccion = expresiones["direccion"].test(txtDireccionTrabajador.value);
-        evaluarTrabajador["direccionTrabajador"] = comprobarDireccion;
-        inputCheck(iconoDireccionTrabajador, txtDireccionTrabajador, comprobarDireccion);
-    });
+        txtDireccionTrabajador.addEventListener('keyup', (e) => {
+            const comprobarDireccion = expresiones["direccion"].test(txtDireccionTrabajador.value);
+            evaluarTrabajador["direccionTrabajador"] = comprobarDireccion;
+            inputCheck(iconoDireccionTrabajador, txtDireccionTrabajador, comprobarDireccion);
+        });
 
-    txtDNITrabajador.addEventListener('keyup', (e) => {
-        const comprobarDniTrabajador = expresiones["dni"].test(txtDNITrabajador.value);
-        evaluarTrabajador["DniTrabajador"] = comprobarDniTrabajador;
-        inputCheck(iconoDNITrabajador, txtDNITrabajador, comprobarDniTrabajador);
-    });
+        txtDNITrabajador.addEventListener('keyup', (e) => {
+            const comprobarDniTrabajador = expresiones["dni"].test(txtDNITrabajador.value);
+            evaluarTrabajador["DniTrabajador"] = comprobarDniTrabajador;
+            inputCheck(iconoDNITrabajador, txtDNITrabajador, comprobarDniTrabajador);
+        });
 
-    txtPasswordRepetir.addEventListener('keyup', (e) => {
-        const comprobarPasswordRepetir = txtPasswordRepetir.value === txtPassword.value && txtPasswordRepetir.value !== '';
-        evaluarTrabajador["PasswordTrabajadorRepetir"] = comprobarPasswordRepetir;
-        inputCheck(iconoPasswordRepetir, txtPasswordRepetir, comprobarPasswordRepetir);
-    });
+        txtPasswordRepetir.addEventListener('keyup', (e) => {
+            const comprobarPasswordRepetir = txtPasswordRepetir.value === txtPassword.value && txtPasswordRepetir.value !== '';
+            evaluarTrabajador["PasswordTrabajadorRepetir"] = comprobarPasswordRepetir;
+            inputCheck(iconoPasswordRepetir, txtPasswordRepetir, comprobarPasswordRepetir);
+        });
 
-    txtTelefonoTrabajador.addEventListener('keyup', (e) => {
-        const comprobarTelefonoTrabajador = expresiones["telefono"].test(txtTelefonoTrabajador.value);
-        evaluarTrabajador["telefonoTrabajador"] = comprobarTelefonoTrabajador;
-        inputCheck(iconoTelefonoTrabajador, txtTelefonoTrabajador, comprobarTelefonoTrabajador);
-    });
+        txtTelefonoTrabajador.addEventListener('keyup', (e) => {
+            const comprobarTelefonoTrabajador = expresiones["telefono"].test(txtTelefonoTrabajador.value);
+            evaluarTrabajador["telefonoTrabajador"] = comprobarTelefonoTrabajador;
+            inputCheck(iconoTelefonoTrabajador, txtTelefonoTrabajador, comprobarTelefonoTrabajador);
+        });
 
-    imagenTrabajador.addEventListener('change', (e) => {
-        const archivo = e.target.files[0];
-        if (archivo != undefined && archivo.size <= 5000000 && formatosArchivo.includes(archivo.type)) {
-            evaluarTrabajador["ArchivoImagen"] = true;
-        }
-    })
+        imagenTrabajador.addEventListener('change', (e) => {
+            const archivo = e.target.files[0];
+            if (archivo != undefined && archivo.size <= 5000000 && formatosArchivo.includes(archivo.type)) {
+                evaluarTrabajador["ArchivoImagen"] = true;
+            }
+        })
+    }
 }
 
 function efectoTablaController() {

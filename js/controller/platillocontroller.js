@@ -7,14 +7,15 @@ const evaluarPlatillo = {
 let idCategoriaGlobal;
 
 window.addEventListener('load', (e) => {
-    categoriaSel();
+    categoriaSelPlatillo();
     eventoCombo();
     platilloSel();
     accionBtnModal();
     efectoBusquedaPlatillo();
     llenarComboCategoriaModal();
     efectoModalAlDesaparecer();
-    evaluarCampos();
+    evaluarCamposPlatillos();
+    evaluarCamposCargo();
 })
 
 function efectoBusquedaPlatillo() {
@@ -151,7 +152,7 @@ export function platilloDel(idPlatillo) {
     });
 }
 
-function categoriaSel() {
+export function categoriaSelPlatillo() {
     $.ajax({
         type: "GET",
         url: `${dominio}/categoria/sel/`,
@@ -204,47 +205,51 @@ function llenarComboCategoriaModal() {
 }
 
 function accionBtnModal() {
-    const btnInsUpdPlatillo = document.getElementById('btnInsUpdPlatillo');
-    btnInsUpdPlatillo.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (evaluarPlatillo["nombrePlatillo"] && evaluarPlatillo["imagen"] && evaluarPlatillo["precio"]) {
-            if ($('#txtIdPlatillo').val() === '') platilloIns();
-            else platilloUpd();
-        } else {
-            mensajeValidacion('Existen campos que no se han completado correctamente, por favor revisar el formulario', false);
-        }
-    })
+    if (window.location.pathname === "/pages/platillo.html") {
+        const btnInsUpdPlatillo = document.getElementById('btnInsUpdPlatillo');
+        btnInsUpdPlatillo.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (evaluarPlatillo["nombrePlatillo"] && evaluarPlatillo["imagen"] && evaluarPlatillo["precio"]) {
+                if ($('#txtIdPlatillo').val() === '') platilloIns();
+                else platilloUpd();
+            } else {
+                mensajeValidacion('Existen campos que no se han completado correctamente, por favor revisar el formulario', false);
+            }
+        });
+    }
 }
 
-function evaluarCampos() {
-    const formatosArchivo = ['image/jpeg', 'image/jpg', 'image/png']
+function evaluarCamposPlatillos() {
+    if (window.location.pathname === "/pages/platillo.html") {
+        const formatosArchivo = ['image/jpeg', 'image/jpg', 'image/png']
 
-    const txtNombrePlatillo = document.getElementById('txtNombrePlatillo');
-    const iconoNombrePlatillo = document.querySelector('#txtNombrePlatillo+.icono');
+        const txtNombrePlatillo = document.getElementById('txtNombrePlatillo');
+        const iconoNombrePlatillo = document.querySelector('#txtNombrePlatillo+.icono');
 
-    const txtPrecio = document.getElementById('txtPrecio');
-    const iconoPrecio = document.querySelector('#txtPrecio+.icono');
+        const txtPrecio = document.getElementById('txtPrecio');
+        const iconoPrecio = document.querySelector('#txtPrecio+.icono');
 
-    const imagenPlatillo = document.getElementById('imagenPlatillo');
+        const imagenPlatillo = document.getElementById('imagenPlatillo');
 
-    txtNombrePlatillo.addEventListener('keyup', (e) => {
-        const comprobarNombrePlatillo = expresiones["nombrePlatillo"].test(txtNombrePlatillo.value);
-        evaluarPlatillo["nombrePlatillo"] = comprobarNombrePlatillo;
-        inputCheck(iconoNombrePlatillo, txtNombrePlatillo, comprobarNombrePlatillo);
-    });
+        txtNombrePlatillo.addEventListener('keyup', (e) => {
+            const comprobarNombrePlatillo = expresiones["nombrePlatillo"].test(txtNombrePlatillo.value);
+            evaluarPlatillo["nombrePlatillo"] = comprobarNombrePlatillo;
+            inputCheck(iconoNombrePlatillo, txtNombrePlatillo, comprobarNombrePlatillo);
+        });
 
-    txtPrecio.addEventListener('keyup', (e) => {
-        const comprobarPrecio = expresiones["dinero"].test(txtPrecio.value);
-        evaluarPlatillo["precio"] = comprobarPrecio;
-        inputCheck(iconoPrecio, txtPrecio, comprobarPrecio);
-    });
+        txtPrecio.addEventListener('keyup', (e) => {
+            const comprobarPrecio = expresiones["dinero"].test(txtPrecio.value);
+            evaluarPlatillo["precio"] = comprobarPrecio;
+            inputCheck(iconoPrecio, txtPrecio, comprobarPrecio);
+        });
 
-    imagenPlatillo.addEventListener('change', (e) => {
-        const archivo = e.target.files[0];
-        if (archivo != undefined && archivo.size <= 5000000 && formatosArchivo.includes(archivo.type)) {
-            evaluarPlatillo["imagen"] = true;
-        }
-    })
+        imagenPlatillo.addEventListener('change', (e) => {
+            const archivo = e.target.files[0];
+            if (archivo != undefined && archivo.size <= 5000000 && formatosArchivo.includes(archivo.type)) {
+                evaluarPlatillo["imagen"] = true;
+            }
+        });
+    }
 }
 
 function efectoModalAlDesaparecer() {
@@ -290,11 +295,13 @@ function limpiarActualizarCombobox(boolean, idCategoria = null) {
 // }
 
 function eventoCombo() {
-    const optionCategoria = document.getElementById('optionCategoria');
-    optionCategoria.addEventListener('change', (e) => {
-        const id = optionCategoria.value === 'Todos' ? null : optionCategoria.value;
-        platilloSel(id);
-    });
+    if (window.location.pathname === "/pages/platillo.html") {
+        const optionCategoria = document.getElementById('optionCategoria');
+        optionCategoria.addEventListener('change', (e) => {
+            const id = optionCategoria.value === 'Todos' ? null : optionCategoria.value;
+            platilloSel(id);
+        });
+    }
 }
 
 function ocultarModal() {
@@ -334,3 +341,4 @@ function limpiarCampoFormularioPlatillo() {
 }
 
 import { dominio, expresiones, inputCheck, mensajeValidacion } from '../controllerMain.js';
+import { evaluarCamposCargo } from '../controller/categoriacontroller.js';

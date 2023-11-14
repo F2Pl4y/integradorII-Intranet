@@ -18,6 +18,7 @@
   </head>
 
   <body>
+    <!-- Modal platillo -->
     <div class="modal fade modalCrear" id="modalInsUpdPlatillo">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -104,6 +105,44 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal categoria -->
+    <div class="modal fade modalCrear" id="modalInsUpdCategoria">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-heade r">
+            <h4 class="modal-title" id="tituloModalCategoria">
+              Registrar categoria
+            </h4>
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body formRegister">
+            <input type="hidden" name="txtIdCategoria" id="txtIdCategoria" />
+            <div class="formGroup">
+              <label for="txtNomCategoria">Categoria:</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Ingresa una categoria"
+                id="txtNomCategoria"
+              />
+              <div class="icono"></div>
+            </div>
+            <button
+              type="button"
+              class="btn btn-success"
+              id="btnInsUpdCategoria"
+            >
+              Registrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <header class="header">
       <div class="nav_barraLateral">
         <div id="btnMenu">
@@ -167,8 +206,19 @@
             class="btn btn-success"
             data-toggle="modal"
             data-target="#modalInsUpdPlatillo"
-            >Insertar</a
+            >Nuevo Platillo</a
           >
+        </div>
+        <div>
+          <a
+            href="#"
+            class="btn btn-success btnInsert"
+            data-toggle="modal"
+            data-target="#modalInsUpdCategoria"
+            id="btnAgregar"
+            >Categoria
+            <i class="bx bxs-add-to-queue"></i>
+          </a>
         </div>
         <select
           name="cars"
@@ -203,12 +253,12 @@
       </div>
     </main>
     <!-- <script src="../js/controller/platillocontroller.js"></script> -->
-    <script type="module">
+    <!-- <script type="module">
       import {
         platilloGet,
         platilloSel,
       } from "../js/controller/platillocontroller.js";
-    </script>
+    </script> -->
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -220,5 +270,9 @@
       src="../js/controller/validadorcontroller.js"
     ></script>
     <script type="module" src="../js/controller/platillocontroller.js"></script>
+    <!-- <script
+      type="module"
+      src="../js/controller/categoriacontroller.js"
+    ></script> -->
   </body>
 </html>

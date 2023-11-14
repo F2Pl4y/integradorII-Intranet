@@ -18,6 +18,7 @@
   </head>
 
   <body>
+    <!-- Modal Empleados -->
     <div class="modal fade modalCrear" id="modalInsUpdTrabajador">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -155,6 +156,49 @@
         </div>
       </div>
     </div>
+    <!-- Modal Cargo -->
+    <div class="modal fade modalCrear" id="modalInsUpdCargo">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="tituloModalcargo">
+              Registrar categoria
+            </h4>
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body formRegister">
+            <input type="hidden" name="txtIdCargo" id="txtIdCargo" />
+            <div class="formGroup">
+              <label for="txtNomCargo">Cargo:</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Ingresa el cargo"
+                id="txtNomCargo"
+              />
+              <div class="icono"></div>
+            </div>
+            <div class="formGroup">
+              <label for="txtSueldo">Sueldo:</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Ingresa el sueldo"
+                id="txtSueldo"
+              />
+              <div class="icono"></div>
+            </div>
+            <button type="button" class="btn btn-success" id="btnInsUpdCargo">
+              Registrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <header class="header">
       <div class="nav_barraLateral">
         <div id="btnMenu">
@@ -217,8 +261,17 @@
           class="btn btn-success btnInsert"
           data-toggle="modal"
           data-target="#modalInsUpdTrabajador"
-          >Agregar <i class="bx bxs-add-to-queue"></i
+          >Trabajador <i class="bx bxs-add-to-queue"></i
         ></a>
+        <a
+          href="#"
+          class="btn btn-success btnInsert"
+          data-toggle="modal"
+          data-target="#modalInsUpdCargo"
+          id="btnAgregar"
+          >Cargo
+          <i class="bx bxs-add-to-queue"></i>
+        </a>
       </div>
       <div class="contenedorMain">
         <div class="bodyMain">
@@ -270,5 +323,6 @@
       type="module"
       src="../js/controller/trabajadorcontroller.js"
     ></script>
+    <script type="module" src="../js/controller/cargocontroller.js"></script>
   </body>
 </html>

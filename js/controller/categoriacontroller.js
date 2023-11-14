@@ -4,13 +4,13 @@ const evaluarCategoria = {
 
 window.addEventListener('load', (e) => {
     efectoModalAlDesaparecer();
-    categoriaSel();
+    categoriaSelCargo();
     accionBtnModal();
     btnAgregarModal();
-    evaluarCampos();
+    evaluarCamposCargo();
 })
 
-function categoriaSel() {
+function categoriaSelCargo() {
     $.ajax({
         type: "GET",
         url: `${dominio}/categoria/sel/`,
@@ -69,9 +69,11 @@ function categoriaIns() {
         processData: false,
         success: function (data) {
             mensajeValidacion(data["mensaje"], data["exito"]);
+            console.log("valor", data["exito"]);
             if (data["exito"]) {
                 ocultarModal();
-                categoriaSel();
+                categoriaSelCargo();
+                categoriaSelPlatillo();
             }
         }
     });
@@ -91,7 +93,7 @@ function categoriaUpd() {
             mensajeValidacion(data["mensaje"], data["exito"]);
             if (data["exito"]) {
                 ocultarModal();
-                categoriaSel();
+                categoriaSelCargo();
             }
         }
     });
@@ -107,7 +109,7 @@ export function categoriaDel(id) {
                 dataType: "json",
                 success: function (data) {
                     mensajeValidacion(data["mensaje"], data["exito"]);
-                    if (data["exito"]) categoriaSel();
+                    if (data["exito"]) categoriaSelCargo();
                 }
             });
         }
@@ -136,7 +138,7 @@ function btnAgregarModal() {
     })
 }
 
-function evaluarCampos() {
+export function evaluarCamposCargo() {
     const txtNomCategoria = document.getElementById('txtNomCategoria');
     const iconoCategoria = document.querySelector('#txtNomCategoria+.icono');
     txtNomCategoria.addEventListener('keyup', (e) => {
@@ -178,3 +180,4 @@ function limpiarCampoFormularioCategoria() {
 }
 
 import { dominio, expresiones, inputCheck, mensajeValidacion, mensajeConfirmacion } from '../controllerMain.js';
+import { categoriaSelPlatillo } from '../controller/platillocontroller.js';

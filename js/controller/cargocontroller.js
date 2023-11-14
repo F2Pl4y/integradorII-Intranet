@@ -7,7 +7,7 @@ window.addEventListener('load', (e) => {
     efectoModalDesaparecer();
     cargoSel();
     btnAgregarModal();
-    evaluarCampos();
+    evaluarCamposCargo();
     accionBtnModal();
     insPuntaje();
 })
@@ -101,6 +101,7 @@ function cargoIns() {
             if (data["exito"]) {
                 ocultarModal();
                 cargoSel();
+                comboCargos();
             }
         }
     });
@@ -194,7 +195,7 @@ function limpiarCampoFormularioCargo() {
  * @param
  * @returns
  */
-function evaluarCampos() {
+function evaluarCamposCargo() {
     const txtNomCargo = document.getElementById('txtNomCargo');
     const iconoNomCargo = document.querySelector('#txtNomCargo+.icono');
     const txtSueldo = document.getElementById('txtSueldo');
@@ -343,11 +344,7 @@ function insPuntaje() {
 }
 
 
-
-
-
-
-
-
 // -------- fin de puntaje --------
 import { dominio, expresiones, inputCheck, mensajeValidacion, mensajeConfirmacion } from '../controllerMain.js';
+
+import { comboCargos } from '../controller/trabajadorcontroller.js';
