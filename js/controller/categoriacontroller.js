@@ -74,6 +74,7 @@ function categoriaIns() {
                 ocultarModal();
                 categoriaSelCargo();
                 categoriaSelPlatillo();
+                llenarComboCategoriaModal();
             }
         }
     });
@@ -180,4 +181,4 @@ function limpiarCampoFormularioCategoria() {
 }
 
 import { dominio, expresiones, inputCheck, mensajeValidacion, mensajeConfirmacion } from '../controllerMain.js';
-import { categoriaSelPlatillo } from '../controller/platillocontroller.js';
+import { categoriaSelPlatillo, llenarComboCategoriaModal } from '../controller/platillocontroller.js';

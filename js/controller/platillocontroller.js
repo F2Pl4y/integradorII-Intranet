@@ -184,7 +184,7 @@ export function categoriaSelPlatillo() {
     });
 }
 
-function llenarComboCategoriaModal() {
+export function llenarComboCategoriaModal() {
     $.ajax({
         type: "GET",
         url: `${dominio}/categoria/sel/`,
