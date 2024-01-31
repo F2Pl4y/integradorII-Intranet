@@ -10,4 +10,6 @@ function cargarDashboard() {
     iframe.src = 'https://app.powerbi.com/view?r=eyJrIjoiNzUyNDQ3MDItODNhOS00YWZiLTkxNGItOTgzZGJiMGU2NTJiIiwidCI6ImM0YTY2YzM0LTJiYjctNDUxZi04YmUxLWIyYzI2YTQzMDE1OCIsImMiOjR9';
     const contenedor = document.getElementById('dashboardVenta');
     contenedor.appendChild(iframe);
+
+    // https://app.powerbi.com/view?r=eyJrIjoiNzUyNDQ3MDItODNhOS00YWZiLTkxNGItOTgzZGJiMGU2NTJiIiwidCI6ImM0YTY2YzM0LTJiYjctNDUxZi04YmUxLWIyYzI2YTQzMDE1OCIsImMiOjR9
 }
